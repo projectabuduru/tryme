@@ -56,6 +56,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 //routing
 $route['home'] = 'front_office/Home/index';
-$route['blog.html'] = 'front_office/Blog/index';
+
+//blog
+$route['blog'] = 'front_office/Blog/index';
+$route['blog/(:num)'] = 'front_office/Blog/index/$1';
+$route['blog/detail/(:any)'] = 'front_office/Blog/blog_detail/$1';
+// $route['blog.html/page/(:any)'] = 'front_office/Blog/load_pagination/$1';
 $route['about.html'] = 'front_office/About/index';
 $route['contact.html'] = 'front_office/Contact/index';

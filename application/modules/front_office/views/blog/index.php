@@ -45,7 +45,7 @@
                                     <li>
                                         <div class="widget-blog-wrap">
                                             <div class="widget-blog-image">
-                                                <a href="#"><img src="assets/images/blog/small-blog.jpg" alt=""></a>
+                                                <a href="#"><img src="<?php echo base_url('assets/images/blog/small-blog.jpg');?>" alt=""></a>
                                             </div>
                                             <div class="widget-blog-content">
                                                 <h6><a href="#">Some patience for the modern market</a></h6>
@@ -58,7 +58,7 @@
                                     <li>
                                         <div class="widget-blog-wrap">
                                             <div class="widget-blog-image">
-                                                <a href="#"><img src="assets/images/blog/small-blog-02.jpg" alt=""></a>
+                                                <a href="#"><img src="<?php echo base_url('assets/images/blog/small-blog-02');?>.jpg" alt=""></a>
                                             </div>
                                             <div class="widget-blog-content">
                                                 <h6><a href="#">Modern market Some patience for the </a></h6>
@@ -71,7 +71,7 @@
                                     <li>
                                         <div class="widget-blog-wrap">
                                             <div class="widget-blog-image">
-                                                <a href="#"><img src="assets/images/blog/small-blog.jpg" alt=""></a>
+                                                <a href="#"><img src="<?php echo base_url('assets/images/blog/small-blog.jpg');?>" alt=""></a>
                                             </div>
                                             <div class="widget-blog-content">
                                                 <h6><a href="#">Lorem ipsum dolor sit amet. </a></h6>
@@ -122,126 +122,30 @@
                         <div class="blog-product-wrapper">
 
                             <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-01.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>12</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-02.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>30</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-03.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>21</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-04.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>22</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-05.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>11</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <!-- single-blog Start -->
-                                    <div class="single-blog mt-30">
-                                        <div class="blog-image">
-                                            <a href="#"><img src="assets/images/blog/blog-06.jpg" alt=""></a>
-                                            <div class="meta-tag">
-                                                <p><span>10</span> / Nov</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-content">
-                                            <h4><a href="#">Lorem Ipsum available but majority</a></h4>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered in some ledmid form There are many majority have suffered </p>
-                                            <div class="read-more">
-                                                <a href="#">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-blog End -->
-                                </div>
+                                <?php
+                                    foreach ($data as $key => $value) {
+                                        echo '<div class="col-lg-6 col-md-6">
+                                                <!-- single-blog Start -->
+                                                <div class="single-blog mt-30">
+                                                    <div class="blog-image">
+                                                        <a href="#"><img src="'.base_url('assets/images/blog/blog-06.jpg').'" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <p><span>'.$value->tgl.'</span> / '.$value->bulan.'</p>
+                                                        </div>
+                                                    </div>
+            
+                                                    <div class="blog-content">
+                                                        <h4><a href="'.base_url('blog/detail/'.$value->blog_slug).'">'.$value->blog_title.'</a></h4>
+                                                        <p>'.substrwords($value->blog_content,150).'</p>
+                                                        <div class="read-more">
+                                                            <a href="'.base_url('blog/detail/'.$value->blog_slug).'">READ MORE</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- single-blog End -->
+                                            </div>';
+                                    }
+                                ?>
                             </div>
 
                             <!-- paginatoin-area start -->
@@ -249,15 +153,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <ul class="pagination-box">
-                                            <li><a class="Previous" href="#"><i class="ion-chevron-left"></i></a>
-                                            </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li>
-                                                <a class="Next" href="#"><i class="ion-chevron-right"></i> </a>
-                                            </li>
+                                            <?php echo $pagination;?>
                                         </ul>
                                     </div>
                                 </div>

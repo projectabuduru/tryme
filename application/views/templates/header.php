@@ -92,7 +92,7 @@
                                 <!--  Start Mainmenu Nav-->
                                 <nav class="main-navigation">
                                     <ul>
-                                        <li class="active"><a href="index.html">Home</a>
+                                        <li class="active"><a href="<?php echo base_url('home');?>">Home</a>
                                             <ul class="sub-menu">   
                                                 <li><a href="index.html">Home Page One</a></li>
                                                 <li><a href="index-2.html">Home Page Two</a></li>
@@ -107,15 +107,15 @@
                                                 <li><a href="shop-fullwidth.html">Shop Full Width</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">Blog</a>
+                                        <li><a href="blog">Blog</a>
                                             <!-- <ul class="sub-menu">
                                                 <li><a href="blog.html">Blog Left Sidebar</a></li>
                                                 <li><a href="blog-right.html">Blog Right Sidebar</a></li>
                                                 <li><a href="blog-details.html">Blog Details Page</a></li>
                                             </ul> -->
                                         </li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="<?php echo base_url('about.html');?>">About</a></li>
+                                        <li><a href="<?php echo base_url('contact.html');?>">Contact</a></li>
                                     </ul>
                                 </nav>
 
