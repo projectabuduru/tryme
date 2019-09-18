@@ -224,6 +224,7 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_nama` char(50) NOT NULL,
+  `user_password` text NOT NULL,
   `user_email` varchar(50) NOT NULL,
   `user_telp` varchar(50) NOT NULL,
   `user_image` text,
