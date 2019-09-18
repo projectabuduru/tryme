@@ -129,6 +129,9 @@
 
     <!-- Main JS -->
     <script src="<?php echo base_url('assets/js/main.js');?>"></script>
+    <!-- load global -->
+    
+    <script src="<?php echo base_url('assets/js/global.js');?>" type="text/javascript"></script>
 
 </body>
 

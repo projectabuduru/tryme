@@ -34,6 +34,18 @@
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css');?>">
     <!--<link rel="stylesheet" href="<?php echo base_url('assets/css/style.min.css');?>">-->
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script> -->
+    <!-- tambahan -->
+    <script src="<?php echo base_url('assets/js/jquery-3.4.1.js');?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    <style>
+    .ml-50{
+        margin-left: 50%;
+    }
+    </style>
+    
 
 </head>
 
@@ -93,19 +105,19 @@
                                 <nav class="main-navigation">
                                     <ul>
                                         <li class="active"><a href="<?php echo base_url('home');?>">Home</a>
-                                            <ul class="sub-menu">   
+                                            <!-- <ul class="sub-menu">   
                                                 <li><a href="index.html">Home Page One</a></li>
                                                 <li><a href="index-2.html">Home Page Two</a></li>
                                                 <li><a href="index-box.html">Home Boxed Layout 1</a></li>
                                                 <li><a href="index-2-box.html">Home Boxed Layout 2</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
-                                        <li><a href="#">Shop</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="shop.html">Shop Left Sidebar</a></li>
+                                        <li><a href="<?php echo base_url('shop');?>">Shop</a>
+                                            <!-- <ul class="sub-menu">
+                                                 <li><a href="shop.html">Shop Left Sidebar</a></li>
                                                 <li><a href="shop-right.html">Shop Right Sidebar</a></li>
                                                 <li><a href="shop-fullwidth.html">Shop Full Width</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
                                         <li><a href="blog">Blog</a>
                                             <!-- <ul class="sub-menu">
@@ -116,6 +128,14 @@
                                         </li>
                                         <li><a href="<?php echo base_url('about.html');?>">About</a></li>
                                         <li><a href="<?php echo base_url('contact.html');?>">Contact</a></li>
+                                        <li><a href="#">Sales Partner</a></li>
+                                        <?php
+                                            if(!empty($user)){
+                                                echo '<li><a href="'.base_url('profile').'">'.$user->user_nama.'</a></li>';
+                                            }else{
+                                                echo '<li><a href="'.base_url('login').'">Login</a></li>';
+                                            }
+                                        ?>
                                     </ul>
                                 </nav>
 
@@ -224,11 +244,11 @@
                             <!-- mobile menu navigation start -->
                             <nav>
                                 <ul class="mobile-menu">
-                                    <li class="menu-item-has-children"><a href="#">Home</a>
-                                        <ul class="dropdown">
+                                    <li class="menu-item-has-children"><a href="<?php echo base_url('home');?>">Home</a>
+                                        <!-- <ul class="dropdown">
                                             <li><a href="index.html">Home version 01</a></li>
                                             <li><a href="index-2.html">Home version 02</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li class="menu-item-has-children"><a href="#">pages</a>
                                         <ul class="megamenu dropdown">
@@ -271,6 +291,8 @@
                                     </li>
                                     <li><a href="about-us.html">About</a></li>
                                     <li><a href="contact-us.html">Contact</a></li>
+                                    <li><a href="#">Sales Partner</a></li>
+                                    <li><a href="Login">Login</a></li>
                                 </ul>
                             </nav>
                             <!-- mobile menu navigation end -->

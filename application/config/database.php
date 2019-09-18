@@ -99,10 +99,10 @@ if(ENVIRONMENT == 'production'){
 }else{
 	$db['default'] = array(
 		'dsn'	=> '',
-		'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => '',
-		'database' => 'tryme',
+		'hostname' => '35.198.235.9',
+		'username' => 'tryme2019',
+		'password' => 'Tryme_2019',
+		'database' => 'db_tryme',
 		'dbdriver' => 'mysqli',
 		'dbprefix' => '',
 		'pconnect' => FALSE,

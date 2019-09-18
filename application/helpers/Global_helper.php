@@ -22,7 +22,7 @@ function res_json($data){
     $data = [
         'status' => $data['status'],
         'message' => $data['message'],
-        'data' => $data['data']
+        'data' => (!empty($data['data']) ? $data['data'] : null)
     ];
     echo json_encode($data);
 }
@@ -35,6 +35,18 @@ function md56($param,$tipe = null,$jml = null){
     }else{
         return 'SUBSTRING(md5('.$param.'),true,6)';
     }
+}
+
+function make_password($password){
+    return md5('tryme'.$password);
+}
+
+function get_user_login($id){
+    if($id){
+        $CI = &get_instance();
+        return $CI->user->get_data($id)->row();
+    }
+    
 }
 
 function substrwords($text, $maxchar, $end='...') {
