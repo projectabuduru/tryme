@@ -62,15 +62,28 @@ $route['home'] = 'front_office/Home/index';
 $route['login'] = 'front_office/Login/index';
 $route['login/register_member'] = 'front_office/Login/action_register_member';
 $route['login/login'] = 'front_office/Login/action_login';
+$route['logout'] = 'front_office/Login/logout';
 
 //sales part
 $route['partner'] = 'front_office/Sales_partner/index';
-$route['partner/register'] = 'front_office/Sales_partner/action_register_partner';
+$route['partner/register'] = 'front_office/Sales_partner/action_register';
+
+//profile
+$route['profile'] = 'front_office/Profile/index';
+$route['profile/province'] = 'front_office/Profile/province';
+$route['profile/city'] = 'front_office/Profile/city';
+$route['profile/city/(:any)'] = 'front_office/Profile/city/$1';
+$route['profile/add/alamat'] = 'front_office/Profile/action_add_alamat';
+
+$route['profile/alamat'] = 'front_office/Profile/alamat';
+$route['profile/alamat/(:any)'] = 'front_office/Profile/alamat/$1';
+
+$route['profile/account'] = 'front_office/Profile/myacoount';
 
 //blog
 $route['blog'] = 'front_office/Blog/index';
 $route['blog/(:num)'] = 'front_office/Blog/index/$1';
 $route['blog/detail/(:any)'] = 'front_office/Blog/blog_detail/$1';
 // $route['blog.html/page/(:any)'] = 'front_office/Blog/load_pagination/$1';
-$route['about.html'] = 'front_office/About/index';
-$route['contact.html'] = 'front_office/Contact/index';
+$route['about'] = 'front_office/About/index';
+$route['contact'] = 'front_office/Contact/index';

@@ -18,15 +18,18 @@ var global = function() {
 						"preventDuplicates": true,
 						"preventOpenDuplicates": true
 						};
-					console.log(data);
+					// console.log(data);
 					var json = JSON.parse(data);
-					console.log(json);
+					// console.log(json);
 					if(json.status == true){
 						toastr.success(json.message);
 						
 						if(json.data == null){
 
 							$(clas).trigger("reset");
+							$('.btn-close').click();
+							// $('#reload-content').load(location.href);
+							location.reload();
 
 						}else if(json.data == 'login' || json.data == 'register' || json.data == 'partner'){
 							
@@ -58,7 +61,7 @@ var global = function() {
 
 	return {
 		// public functions
-		init_form_add: function(clas,buton, urll) { clas_form_add(clas, buton, urll); }
+		init_form_add: function(clas,buton, urll) { clas_form_add(clas, buton, urll); },
 	};
 }();
 

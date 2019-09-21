@@ -1,5 +1,4 @@
-
-        <footer>
+<footer>
             <div class="footer-top section-pb section-pt-60">
                 <div class="container">
                     <div class="row">
@@ -98,41 +97,13 @@
             </div>
         </footer>
 
-
-
-    </div>
-
-    <!-- JS
-============================================ -->
-
-    <!-- Modernizer JS -->
-    <script src="<?php echo base_url('assets/js/vendor/modernizr-3.6.0.min.js');?>"></script>
-    <!-- jQuery JS -->
-    <script src="<?php echo base_url('assets/js/vendor/jquery-3.3.1.min.js');?>"></script>
-    <!-- Bootstrap JS -->
-    <script src="<?php echo base_url('assets/js/vendor/popper.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/vendor/bootstrap.min.js');?>"></script>
-
-    <!-- Slick Slider JS -->
-    <script src="<?php echo base_url('assets/js/plugins/slick.min.js');?>"></script>
-    <!--  Jquery ui JS -->
-    <script src="<?php echo base_url('assets/js/plugins/jqueryui.min.js');?>"></script>
-    <!--  Scrollup JS -->
-    <script src="<?php echo base_url('assets/js/plugins/scrollup.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/plugins/ajax-contact.js');?>"></script>
-
-    <!-- Vendor & Plugins JS (Please remove the comment from below vendor.min.js & plugins.min.js for better website load performance and remove js files from avobe) -->
-    <!--
-<script src="<?php echo base_url('assets/js/vendor/vendor.min.js');?>"></script>
-<script src="<?php echo base_url('assets/js/plugins/plugins.min.js');?>"></script>
--->
-
-    <!-- Main JS -->
-    <script src="<?php echo base_url('assets/js/main.js');?>"></script>
-    <!-- load global -->
-    
-    <script src="<?php echo base_url('assets/js/global.js');?>" type="text/javascript"></script>
-
-</body>
-
-</html>
+        <script>
+            $('html, body').animate(
+            {
+                scrollTop: $($('.dashboard-content')).offset().top,
+                // scrollLeft($("#dt-pasien"))
+            },
+                500,
+                'linear'
+            )
+        </script>

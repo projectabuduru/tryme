@@ -9,65 +9,39 @@ class Blog extends CI_Controller {
     {
         parent::__construct();
         // $this->load->helper('url');
-        // $this->load->model('Mod_blog');
+        $this->load->model('Mod_blog', 'blog');
     }
     
 
     public function index($page = 0)
     {
-        $config['base_url'] = base_url('blog/'); //site url
-        $config['total_rows'] = $this->blog->jumlah_data(); //total row
-        $config['per_page'] = 6;  //show record per halaman
-        $config["uri_segment"] = 2;  // uri parameter
-        $config['use_page_numbers'] = TRUE;   
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
-        // pre([
-        //     $this->uri->segment(0),
-        //     $this->uri->segment(1),
-        //     $this->uri->segment(2),
-        //     $this->uri->segment(3)
-        //     ]);
+        $select = '*,DATE_FORMAT(created_at, "%d %b %Y") as tanggal';
+        $where = null;
+        $join = null;
+        $order = null;
+        $url = 'blog/';
+        $per_page = '6';
+        $uri = '2';
+        $result = cust_pagination('blog',$select, $where, $join, $order, $url, $per_page, $uri, $page);
         
-        $config['first_link']       = 'First';
-        $config['last_link']        = 'Last';
-        $config['next_link']        = 'Next';
-        $config['prev_link']        = 'Prev';
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="active"><span class="page-link"><a href="#">';
-        $config['cur_tag_close']    = '</a></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close']  = '</span>Next</li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close']  = '</span></li>';
- 
-        $this->pagination->initialize($config);
-        // $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        if($page != 0){ 
-            $page = ($page-1) * $config['per_page']; 
-          }  
-        
-        $data = $this->blog->get_data($config["per_page"], $page)->result();
-
-        foreach ($data as $key => $value) {
+        foreach ($result as $key => $value) {
             
             $exp_date = explode(' ', $value->tanggal);
-            // pre($exp_date);
+            // pre-exp_date);
+            $value->blog_content = substrwords($value->blog_content, 150);
             $value->tgl = $exp_date[0];
             $value->bulan = $exp_date[1];
             $value->tahun = $exp_date[2];
         }
-        
-        $data['data'] = $data;
+        // pre($data);
+        $cek_session = !empty($this->session->userdata('user')) ? $this->session->userdata('user')['user_id'] : null;
+        $get_user = (object)get_user_login($cek_session);
+        // pre($get_user);
+        $data['user'] = $get_user;
+        $data['data'] = $result;
         $data['pagination'] = $this->pagination->create_links();
         $data['title']  = 'Blog';
+        // pre($data);
         // $data = [
         //     'title' => 'Blog',
         //     'data' => $this->blog->get_data($config['per_page'], $from)->result()

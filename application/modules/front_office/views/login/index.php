@@ -40,8 +40,6 @@
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <div class="show_error" style="color:red">
-                                    </div>
                                     <form action="#" class="frm-input-register" method="post" enctype="multipart/form-data">
                                         <div class="login-input-box">
                                             <input type="text" name="user_nama" id="user_nama" required  placeholder="User Nama">

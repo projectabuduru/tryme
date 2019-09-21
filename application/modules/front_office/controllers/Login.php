@@ -8,6 +8,7 @@ class Login extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Mod_user', 'user');
     }
     
     private $title = 'Login | Register';
@@ -49,16 +50,36 @@ class Login extends CI_Controller {
 
             $post['user_password'] = make_password($post['user_password']);
             // pre($post);
-            $query = $this->user->get_data(null, $post)->row();
-            $sesion = [
-                'role' => $query->role,
-                'user_id' => $query->user_id
-            ];
-            $this->session->set_userdata('user',$sesion);
+            $cek_user = $this->user->get_data(null, ['user_email' => $post['user_email']])->row();
 
-            $data['status'] = true;
-            $data['message'] = 'Berhasil melakukan login';
-            $data['data'] = 'login';
+            if($cek_user){
+                // pre($post);
+                $cek_login = $this->user->get_data(null, $post)->row();
+                // pre($this->db->last_query($cek_login));
+
+                if($cek_login){
+                    $sesion = [
+                        'role' => $cek_login->role,
+                        'user_id' => $cek_login->user_id
+                    ];
+                    $this->session->set_userdata('user',$sesion);
+        
+                    $data['status'] = true;
+                    $data['message'] = 'Berhasil melakukan login';
+                    $data['data'] = 'login';
+                }else{
+        
+                    $data['status'] = false;
+                    $data['message'] = 'Password salah';
+                    $data['data'] = null;
+                }
+            }else{
+                    $data['status'] = false;
+                    $data['message'] = 'Email tidak ditemukan';
+                    $data['data'] = null;
+            }
+
+            
             
             return res_json($data);
 
@@ -86,6 +107,7 @@ class Login extends CI_Controller {
             // redirect('login.html');
         }else{
 
+            $post['user_nama'] = strtoupper($post['user_nama']);
             $post['user_password'] = make_password($post['user_password']);
             $post['role'] = 'member';
             $post['created_at'] = date('Y-m-d H:i:s');
@@ -112,6 +134,11 @@ class Login extends CI_Controller {
             return res_json($data);
 
         }
+    }
+
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect('home');
     }
 
 }

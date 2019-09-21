@@ -1,59 +1,4 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> <?php echo $title;?> </title>
-    <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/images/favicon.ico');?>">
-
-    <!-- CSS
-	============================================ -->
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/vendor/bootstrap.min.css');?>">
-
-    <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/vendor/ionicons.min.css');?>">
-
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/plugins/slick.cs');?>s">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/plugins/animation.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/plugins/jqueryui.min.css');?>">
-
-    <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
-    <!--
-    <script src="<?php echo base_url('assets/js/vendor/vendor.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/plugins/plugins.min.js');?>"></script>
-    -->
-
-    <!-- Main Style CSS (Please use minify version for better website load performance) -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css');?>">
-    <!--<link rel="stylesheet" href="<?php echo base_url('assets/css/style.min.css');?>">-->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script> -->
-    <!-- tambahan -->
-    <script src="<?php echo base_url('assets/js/jquery-3.4.1.js');?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-
-    <style>
-    .ml-50{
-        margin-left: 50%;
-    }
-    </style>
-    
-
-</head>
-
-<body>
-
-    <div class="main-wrapper">
-
-        <header class="fl-header">
+<header class="fl-header">
 
             <!-- Header Top Start -->
             <div class="header-top-area d-none d-lg-block">
@@ -104,34 +49,21 @@
                                 <!--  Start Mainmenu Nav-->
                                 <nav class="main-navigation">
                                     <ul>
-                                        <li class="active"><a href="<?php echo base_url('home');?>">Home</a>
-                                            <!-- <ul class="sub-menu">   
-                                                <li><a href="index.html">Home Page One</a></li>
-                                                <li><a href="index-2.html">Home Page Two</a></li>
-                                                <li><a href="index-box.html">Home Boxed Layout 1</a></li>
-                                                <li><a href="index-2-box.html">Home Boxed Layout 2</a></li>
-                                            </ul> -->
-                                        </li>
-                                        <li><a href="<?php echo base_url('shop');?>">Shop</a>
-                                            <!-- <ul class="sub-menu">
-                                                 <li><a href="shop.html">Shop Left Sidebar</a></li>
-                                                <li><a href="shop-right.html">Shop Right Sidebar</a></li>
-                                                <li><a href="shop-fullwidth.html">Shop Full Width</a></li>
-                                            </ul> -->
-                                        </li>
-                                        <li><a href="blog">Blog</a>
-                                            <!-- <ul class="sub-menu">
-                                                <li><a href="blog.html">Blog Left Sidebar</a></li>
-                                                <li><a href="blog-right.html">Blog Right Sidebar</a></li>
-                                                <li><a href="blog-details.html">Blog Details Page</a></li>
-                                            </ul> -->
-                                        </li>
-                                        <li><a href="<?php echo base_url('about.html');?>">About</a></li>
-                                        <li><a href="<?php echo base_url('contact.html');?>">Contact</a></li>
-                                        <li><a href="#">Sales Partner</a></li>
+                                        <li class="active"><a href="<?php echo base_url('home');?>">Home</a></li>
+                                        <li><a href="#">Shop</a></li>
+                                        <li><a href="<?php echo base_url('blog');?>">Blog</a></li>
+                                        <li><a href="<?php echo base_url('About');?>">About</a></li>
+                                        <li><a href="<?php echo base_url('contact');?>">Contact</a></li>
+                                        <li><a href="<?php echo base_url('partner');?>">Sales Partner</a></li>
                                         <?php
                                             if(!empty($user)){
-                                                echo '<li><a href="'.base_url('profile').'">'.$user->user_nama.'</a></li>';
+                                                echo '<li>
+                                                        <a href="#">'.$user->user_nama.'</a>
+                                                        <ul class="sub-menu">
+                                                            <li><a href="'.base_url('profile').'">Profile</a></li>
+                                                            <li><a href="'.base_url('logout').'">Logout</a></li>
+                                                        </ul>
+                                                    </li>';
                                             }else{
                                                 echo '<li><a href="'.base_url('login').'">Login</a></li>';
                                             }

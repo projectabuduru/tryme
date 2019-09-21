@@ -123,6 +123,7 @@
 
                             <div class="row">
                                 <?php
+                                // pre($user);
                                     foreach ($data as $key => $value) {
                                         echo '<div class="col-lg-6 col-md-6">
                                                 <!-- single-blog Start -->
@@ -136,7 +137,7 @@
             
                                                     <div class="blog-content">
                                                         <h4><a href="'.base_url('blog/detail/'.$value->blog_slug).'">'.$value->blog_title.'</a></h4>
-                                                        <p>'.substrwords($value->blog_content,150).'</p>
+                                                        <p>'.$value->blog_content.'</p>
                                                         <div class="read-more">
                                                             <a href="'.base_url('blog/detail/'.$value->blog_slug).'">READ MORE</a>
                                                         </div>
