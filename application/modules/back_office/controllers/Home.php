@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 
     public function index()
     {
-        $this->template->display_bo('home/v_home');
+        // $this->template->display_bo('home/v_home');
     }
 
 }

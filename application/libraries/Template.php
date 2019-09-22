@@ -20,14 +20,5 @@
 			$this->_ci->load->view('templates/template', $data); 	
 			
 		}
-		
-		function display_bo( $template, $data = NULL){
-			$data['_header']    = $this->_ci->load->view('templates_bo/topbar', $data, TRUE);
-			$data['_sidebar']   = $this->_ci->load->view('templates_bo/sidebar', $data, TRUE);
-			$data['_content']   = $this->_ci->load->view($template, $data, TRUE);
-			$data['_footer']    = $this->_ci->load->view('templates_bo/footer', $data, TRUE);
-			$this->_ci->load->view('templates_bo/template', $data); 	
-			
-	    }
 	}
 ?>
