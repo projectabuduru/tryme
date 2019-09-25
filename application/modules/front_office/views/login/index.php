@@ -18,7 +18,7 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post" class="frm-input-login">
+                                    <form action="<?php echo base_url('login/login');?>" method="post" class="frm-input-login">
                                         <div class="login-input-box">
                                             <input type="text" name="user_email" placeholder="User Email">
                                             <input type="password" name="user_password" placeholder="Password">
@@ -40,7 +40,7 @@
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" class="frm-input-register" method="post" enctype="multipart/form-data">
+                                    <form action="<?php echo base_url('login/register_member');?>" class="frm-input-register" method="post" enctype="multipart/form-data">
                                         <div class="login-input-box">
                                             <input type="text" name="user_nama" id="user_nama" required  placeholder="User Nama">
                                             <input name="user_email" placeholder="Email" id="user_email" required  type="email">
@@ -64,15 +64,14 @@
 <script>
     $(document).ready(function () {
         // $(".buton").click(function(){
-            var urll_login = '<?php echo base_url('login/login');?>';
+            
             var cls_login = '.frm-input-login';
             var buton_login = '.buton-login';
-            global.init_form_add(cls_login, buton_login, urll_login);
+            global.init_form_add(cls_login, buton_login);
 
-            var urll_register = '<?php echo base_url('login/register_member');?>';
             var cls_register = '.frm-input-register';
             var buton_register = '.buton-register';
-            global.init_form_add(cls_register, buton_register, urll_register);
+            global.init_form_add(cls_register, buton_register);
 
         // });
     });

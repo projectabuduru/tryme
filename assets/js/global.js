@@ -3,14 +3,15 @@
 
 var global = function() {
 	// Private functions
-	var clas_form_add = function(clas, buton, urll){
+	var clas_form_add = function(clas, buton){
 
 		function processForm( e ){
 			e.preventDefault();
 			// console.log($('form'+clas+' :input[class=required]'));
 			// $(buton).prop('disabled', true);
+			// console.log($(clas).serialize());
 			$.ajax({
-				url: urll,
+				url: $(clas).attr('action'),
 				type: 'post',
 				data: $(clas).serialize(),
 				success: function( data ){
@@ -57,11 +58,20 @@ var global = function() {
 		}
 
 		$(buton).click(processForm);
+		$(clas).keypress(function (e) { 
+			if(event.which == 13){
+				console.log('enter');
+				// $(buton).click(processForm);
+				$(buton).trigger('click', processForm);
+				// return true;
+			}
+		});
+		
 	}
 
 	return {
 		// public functions
-		init_form_add: function(clas,buton, urll) { clas_form_add(clas, buton, urll); },
+		init_form_add: function(clas,buton, urll) { clas_form_add(clas, buton, urll);  },
 	};
 }();
 

@@ -34,7 +34,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('user_password', 'Password', 'required|min_length[6]', 
                                             [
                                                 'required' => 'password tidak boleh kosong', 
-                                                'min_length' => 'Minimal 6 karakter'
+                                                'min_length' => 'Password Minimal 6 karakter'
                                             ]);
 
         if (!$this->form_validation->run($this))

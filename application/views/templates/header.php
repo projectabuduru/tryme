@@ -84,47 +84,10 @@
                                     <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
                                 </div>
 
-
                                 <div class="shopping-cart-wrap">
-                                    <a href="#"><i class="ion-ios-cart-outline"></i> <span id="cart-total">2</span></a>
+                                    <a href="#"><i class="ion-ios-cart-outline badge-cart"></i>  </a>
                                     <ul class="mini-cart">
-                                        <li class="cart-item">
-                                            <div class="cart-image">
-                                                <a href="product-details.html"><img alt="" src="<?php echo base_url('assets/images/product/product-01.jpg');?>"></a>
-                                            </div>
-                                            <div class="cart-title">
-                                                <a href="product-details.html">
-                                                    <h4>Product Name 01</h4>
-                                                </a>
-                                                <span class="quantity">1 ×</span>
-                                                <div class="price-box"><span class="new-price">$130.00</span></div>
-                                                <a class="remove_from_cart" href="#"><i class="icon-trash icons"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="cart-item">
-                                            <div class="cart-image">
-                                                <a href="product-details.html"><img alt="" src="<?php echo base_url('assets/images/product/product-02.jpg');?>"></a>
-                                            </div>
-                                            <div class="cart-title">
-                                                <a href="product-details.html">
-                                                    <h4>Product Name 03</h4>
-                                                </a>
-                                                <span class="quantity">1 ×</span>
-                                                <div class="price-box"><span class="new-price">$130.00</span></div>
-                                                <a class="remove_from_cart" href="#"><i class="icon-trash icons"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="subtotal-titles">
-                                            <div class="subtotal-titles">
-                                                <h3>Sub-Total :</h3><span>$ 230.99</span>
-                                            </div>
-                                        </li>
-                                        <li class="mini-cart-btns">
-                                            <div class="cart-btns">
-                                                <a href="cart.html">View cart</a>
-                                                <a href="checkout.html">Checkout</a>
-                                            </div>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
 
@@ -264,3 +227,57 @@
 
 
         </header>
+
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url('front_office/cart/mycart');?>",
+                    dataType: "json",
+                    success: function (response) {
+                        var data = response.data;
+                        // console.log(data);
+                        var total = 0;
+                        var html = '';
+                        var badge_cart = 0;
+                        $.each(data, function (key, value) { 
+                            // console.log(data);
+                            if(badge_cart < 3){
+                                html += '<li class="cart-item">' +
+                                        '<div class="cart-image">' +
+                                            '<a href="product-details.html"><img alt="" src="<?php echo base_url('assets/images/product/');?>'+value.product_image+'"></a>' +
+                                        '</div>' +
+                                        '<div class="cart-title">' +
+                                            '<a href="product-details.html">' +
+                                                '<h4>'+value.product_name+'</h4>' +
+                                            '</a>' +
+                                            '<span class="quantity">'+value.product_qty+'×</span>' +
+                                            '<div class="price-box"><span class="new-price">Rp. '+value.price.toLocaleString()+'</span></div>'+
+                                            '<a class="remove_from_cart" href="#"><i class="icon-trash icons"></i></a>' +
+                                        '</div>' +
+                                    '</li>';
+                            }
+                            total = value.total.toLocaleString();
+                            badge_cart++;
+                            // i++:
+                        });
+                        console.log(total);
+                        html += '<li class="subtotal-titles">' +
+                                    '<div class="subtotal-titles">' +
+                                        '<h3>Sub-Total :</h3><span>Rp. '+total.toLocaleString()+' </span>' +
+                                    '</div>' +
+                                '</li>' +
+                                '<li class="mini-cart-btns">' +
+                                    '<div class="cart-btns">' +
+                                        '<a href="<?php echo base_url('mycart');?>">View cart</a>' +
+                                        '<a href="checkout.html">Checkout</a>' +
+                                    '</div>' +
+                                '</li>';
+
+                        $(".mini-cart").html(html);
+                        $(".badge-cart").html('<span id="cart-total">'+badge_cart+'</span>');
+                        
+                    }
+                });
+            });
+        </script>

@@ -27,6 +27,35 @@ function res_json($data){
     echo json_encode($data);
 }
 
+function res_true($data = null, $message = null){
+
+    $response = [
+        'status' => true,
+        'message' => !empty($message) ? $message : 'Berhasil',
+        'data' => $data
+    ];
+
+    return json_encode($response);
+}
+
+function res_false($message){
+    $response = [
+        'status' => false,
+        'message' => !empty($message) ? $message : 'Gagal',
+    ];
+
+    echo json_encode($response);
+}
+
+function res_warning($message){
+    $response = [
+        'status' => 'warning',
+        'message' => !empty($message) ? $message : 'Gagal',
+    ];
+
+    echo json_encode($response);
+}
+
 function md56($param,$tipe = null,$jml = null){
     if(empty($tipe)){
         return substr(md5($param),0, ( empty($jml) ? 6 : $jml  ) );

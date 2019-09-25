@@ -50,6 +50,20 @@ class Mod_user extends CI_Model {
                          ->update('user_alamat',$data);
     }
 
+    public function update_data_profile($where, $data){
+        
+        if(!empty($where)){
+            foreach ($where as $key => $value) {
+                $this->db->where($value[0],$value[2],$value[1]);
+            }
+        }
+
+        return $this->db->update('user', $data);
+
+    }
+
+
+    //trash
     public function get_datatable_alamat($id){
         // pre($id);
         $this->db->where('u.user_id', $id)
@@ -104,6 +118,7 @@ class Mod_user extends CI_Model {
         return ['data' => $records, 'recordsTotal' => $count_all_row, 'recordsFiltered' => $count_row];
 
     }
+    
 }
 
 /* End of file User.php */

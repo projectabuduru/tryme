@@ -68,6 +68,9 @@ $route['logout'] = 'front_office/Login/logout';
 $route['partner'] = 'front_office/Sales_partner/index';
 $route['partner/register'] = 'front_office/Sales_partner/action_register';
 
+//mycart
+$route['mycart'] = 'front_office/Cart/mycart_show';
+
 //profile
 $route['profile'] = 'front_office/Profile/index';
 $route['profile/province'] = 'front_office/Profile/province';

@@ -14,7 +14,7 @@
                         <h4 class="modal-title" id="myModalLabel" style="margin-left:25%;">Tambah Alamat Baru</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     </div>
-                    <form class="form-horizontal frm-add-alamat" method="post" action="#">
+                    <form class="form-horizontal frm-add-alamat" method="post" action="<?php echo base_url('profile/add/alamat');?>">
                         <div class="modal-body" style="font-size: 12px;">
 
                             <div class="form-group">
@@ -199,10 +199,9 @@
          });
       });
 
-        var urll_add_alamat = '<?php echo base_url('profile/add/alamat');?>';
         var cls_add_alamat = '.frm-add-alamat';
         var buton_add_alamat = '.buton-add-alamat';
-        global.init_form_add(cls_add_alamat, buton_add_alamat, urll_add_alamat);
+        global.init_form_add(cls_add_alamat, buton_add_alamat);
 
         $(".change_status").click(function(){
             var id = $(this).data('id');
