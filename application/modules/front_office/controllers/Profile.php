@@ -58,6 +58,7 @@ class Profile extends CI_Controller {
         foreach ($get_city->rajaongkir->results as $key => $value) {
             $list[$key]['id'] = $value->city_id;
             $list[$key]['text'] = $value->city_name." ($value->type)";
+            $list[$key]['kodepos'] = $value->postal_code;
         }
 
         echo json_encode($list);

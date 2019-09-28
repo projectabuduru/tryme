@@ -90,30 +90,18 @@
                                             <div class="single-form-row">
                                                 <label>Provinsi <span class="required">*</span></label>
                                                 <div class="nice-select wide">
-                                                    <select required name="alamat_provinsi_id">
-                                                        <option>Select Country...</option>
-                                                        <option>Albania</option>
-                                                        <option>Angola</option>
-                                                        <option>Argentina</option>
-                                                        <option>Austria</option>
-                                                        <option>Azerbaijan</option>
-                                                        <option>Bangladesh</option>
+                                                    <select required name="alamat_provinsi_id" class="province fz-12">
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12" id="show-kota">
                                             <div class="single-form-row">
                                                 <label>Kota / Kabupaten <span class="required">*</span></label>
                                                 <div class="nice-select wide">
-                                                    <select required name="alamat_kota_id">
-                                                        <option>Select Country...</option>
-                                                        <option>Albania</option>
-                                                        <option>Angola</option>
-                                                        <option>Argentina</option>
-                                                        <option>Austria</option>
-                                                        <option>Azerbaijan</option>
-                                                        <option>Bangladesh</option>
+                                                    <select required name="alamat_kota_id" class="kota fz-12">
+                                                       
                                                     </select>
                                                 </div>
                                             </div>
@@ -123,6 +111,29 @@
                                                 <label>Alamat<span class="required">*</span></label>
                                                 <textarea placeholder="Isikan Alamat lengkap tujuan" class="checkout-mess" rows="2" cols="5" required name="alamat"></textarea>    
                                             </p>    
+                                        </div>
+                                        <div class="col-lg-12" id="show-kurir">
+                                            <div class="single-form-row">
+                                                <label>Kurir <span class="required">*</span></label>
+                                                <div class="nice-select wide">
+                                                    <select required name="kurir" class="kurir fz-12">
+                                                        <option>--Pilih Kurir--</option>
+                                                        <option value="jne">JNE</option>
+                                                        <option value="tiki">TIKI</option>
+                                                        <option value="pos">POS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12" id="show-paket">
+                                            <div class="single-form-row">
+                                                <label>Paket pengiriman<span class="required">*</span></label>
+                                                <div class="nice-select wide">
+                                                    <select required name="kurir_paket" class="paket fz-12">
+                                                       
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <p class="single-form-row m-0">
@@ -207,6 +218,7 @@
             $(document).ready(function () {
                 
                 //get data cart
+                let total_berat = 0;
                 $.ajax({
                     type: "GET",
                     url: "<?php echo base_url('front_office/Cart/mycart');?>",
@@ -217,6 +229,7 @@
                         var html = '';
                         var html_footer = '';
                         var total_barang = 0, total = 0;
+                        
                         $.each(data, function (key, value) { 
                             total_barang = value.product_qty * value.price;
                             total = total + total_barang;
@@ -227,10 +240,13 @@
                                         '</td>' +
                                         '<td class="product-total">' +
                                             '<span class="amount product_price">Rp. '+total_barang.toLocaleString()+'</span>' +
-                                            '<input type="hidden" required name="product_price['+value.product_id+']" class="product_price" value="'+total_barang+'">' +
+                                            '<input type="hidden" required name="product_price['+value.product_id+']" class="product_price" value="'+value.price+'">' +
+                                            '<input type="hidden" required name="total_product_price['+value.product_id+']" class="product_price" value="'+total_barang+'">' +
                                         '</td>' +
                                    '</tr>';
+                            total_berat += value.product_berat * value.product_qty;
                         });
+                        console.log(total_berat);
                         console.log(total);
                         $('.list-checkout-body').html(html);
                         html_footer = '<tr class="cart-subtotal">'+
@@ -268,6 +284,84 @@
                         $('.list-bank').html(html);
                     }
                 });
+
+                //select2
+                $("#show-kota").hide();
+                $('#show-kurir').hide();
+                $('#show-paket').hide();
+                $('.province').select2({
+                    minimumInputLength: 2,
+                    allowClear: false,
+                    placeholder: 'masukkan nama propinsi',
+                    ajax: {
+                        dataType: 'json',
+                        url: '<?php echo base_url('front_office/Rajaongkir/province');?>',
+                        delay: 800,
+                        data: function(params) {
+                            return {
+                            search: params.term
+                            }
+                        },
+                        processResults: function (data, page) {
+                            $("#show-kota").show();
+                            return {
+                                results: data
+                            };
+                        },
+                    }
+                }).on('select2:select', function (evt) {
+                    var data = $(".province option:selected").text();
+                    var province_id = $(this).val();
+                    var urllnya = '<?php echo base_url('front_office/Rajaongkir/city/');?>'+province_id;
+                    console.log(urllnya);
+                    $.ajax({
+                        type: "GET",
+                        url: urllnya,
+                        dataType: "json",
+                        success: function (response) {
+                            //  console.log(response);
+                            // var json = JSON.parse(response);
+                            // console.log(response);
+                            var html = '';
+                            $.each(response, function (key, value) { 
+                                html += '<option value="'+value.id+','+value.kodepos+'">'+value.text+'</option>';
+                            });
+                            $(".kota").show();
+                            $(".kota").html(html);
+                            $("#show-kurir").show();
+                        }
+                    });
+                });
+
+                $('.kota').change(function(){
+                    $('.kurir').prop('selectedIndex',0);
+                    // console.log('reset');
+                });
+
+                $(".kurir").change(function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo base_url('front_office/Rajaongkir/cost');?>",
+                        data: {destination : $('.kota').val(),weight:total_berat,courier:$(this).val()},
+                        success: function (response) {
+                            var response = JSON.parse(response);
+                            console.log(response);
+                            if(response.status ===  true){
+                                var html = '';
+                                $.each(response.data, function (key, value) { 
+
+                                    html += '<option value="'+value.service+','+value.cost[0].value+'">'+value.description+'('+value.cost[0].etd+' Hari)</option>';
+
+                                });
+                                $(".paket").html(html);
+                                $("#show-paket").show();
+                            }else{
+                                toastr.error(response.message);
+                            }
+                            // console.log(data.data);
+                        }
+                    });
+                });              
 
             });
         </script>

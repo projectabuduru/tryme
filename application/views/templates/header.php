@@ -232,7 +232,7 @@
             $(document).ready(function () {
                 $.ajax({
                     type: "GET",
-                    url: "<?php echo base_url('front_office/cart/mycart');?>",
+                    url: "<?php echo base_url('front_office/Cart/mycart');?>",
                     dataType: "json",
                     success: function (response) {
                         var data = response.data;
@@ -240,6 +240,7 @@
                         var total = 0;
                         var html = '';
                         var badge_cart = 0;
+                        var checkout = '';
                         $.each(data, function (key, value) { 
                             // console.log(data);
                             if(badge_cart < 3){
@@ -261,7 +262,11 @@
                             badge_cart++;
                             // i++:
                         });
-                        console.log(total);
+
+                        if(badge_cart > 0){
+                            checkout = '<a href="<?php echo base_url('order/checkout');?>">Checkout</a>';
+                        }
+                        // console.log(total);
                         html += '<li class="subtotal-titles">' +
                                     '<div class="subtotal-titles">' +
                                         '<h3>Sub-Total :</h3><span>Rp. '+total.toLocaleString()+' </span>' +
@@ -270,7 +275,7 @@
                                 '<li class="mini-cart-btns">' +
                                     '<div class="cart-btns">' +
                                         '<a href="<?php echo base_url('mycart');?>">View cart</a>' +
-                                        '<a href="<?php echo base_url('order/checkout');?>">Checkout</a>' +
+                                        checkout +
                                     '</div>' +
                                 '</li>';
 

@@ -36,8 +36,6 @@
                                     <div class="coupon-all">
 
                                         <div class="coupon2">
-                                            <input class="submit btn btn-cart" name="update_cart" value="Update cart" type="button">
-                                            <a href="shop.html" class="btn continue-btn">Continue Shopping</a>
                                         </div>
 
                                         <div class="coupon">
@@ -73,38 +71,50 @@
                 var total = 0;
                 var total_sub_barang = 0;
                 var diskon = '';
-                $.each(data, function (key, value) { 
-                    // total++;
+                var proses_transaksi = '';
+                console.log(data.length);
+                var update_cart = '';
+                if(data.length > 0){
+                    $.each(data, function (key, value) { 
+                        // total++;
 
-                    if(value.old_price == value.price){
-                        diskon = '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
-                    }else{
-                        diskon = '<span class="old-price"> Rp. <del>'+value.old_price.toLocaleString()+',</del> </span><br>'+
-                                            '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
-                    }
-                        total_sub_barang = value.price * value.product_qty;
-                        html +='<tr>' +
-                                    '<td class="plantmore-product-thumbnail"><a href="#"><img alt="" src="<?php echo base_url('assets/images/product/');?>'+value.product_image+'" style="width:35%"></a></td>' +
-                                    '<td class="plantmore-product-name"><a href="javscript:void(0);">'+value.product_name+'</a></td>' +
-                                    '<td class="plantmore-product-price">'+
-                                        '<span class="amount">'+diskon+
-                                        '</span></td>' +
-                                    '<td class="plantmore-product-quantity">' +
-                                        '<input type="hidden" name="product_id[]" value="'+value.product_id+'"><input value="'+value.product_qty+'" name="qty[]" type="number" min="0" max="'+value.product_stok+'" data-harga="'+value.price+'" data-qty="'+value.product_qty+'" data-id="'+value.product_id+'" class="cart-qty">' +
-                                    '</td>' +
-                                    '<td class="product-subtotal"><span class="amount" id="'+value.product_id+'">Rp. '+total_sub_barang.toLocaleString()+'</span></td>' +
-                                    '<td class="plantmore-product-remove"><a data-id="'+value.product_id+'" data-nama="'+value.product_name+'" class="cart-delete"><i class="ion-close"></i></a></td>' +
-                                '</tr>';
-                        total = total + total_sub_barang;
-                });
+                        if(value.old_price == value.price){
+                            diskon = '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
+                        }else{
+                            diskon = '<span class="old-price"> Rp. <del>'+value.old_price.toLocaleString()+',</del> </span><br>'+
+                                                '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
+                        }
+                            total_sub_barang = value.price * value.product_qty;
+                            html +='<tr>' +
+                                        '<td class="plantmore-product-thumbnail"><a href="#"><img alt="" src="<?php echo base_url('assets/images/product/');?>'+value.product_image+'" style="width:35%"></a></td>' +
+                                        '<td class="plantmore-product-name"><a href="javscript:void(0);">'+value.product_name+'</a></td>' +
+                                        '<td class="plantmore-product-price">'+
+                                            '<span class="amount">'+diskon+
+                                            '</span></td>' +
+                                        '<td class="plantmore-product-quantity">' +
+                                            '<input type="hidden" name="product_id[]" value="'+value.product_id+'"><input value="'+value.product_qty+'" name="qty[]" type="number" min="0" max="'+value.product_stok+'" data-harga="'+value.price+'" data-qty="'+value.product_qty+'" data-id="'+value.product_id+'" class="cart-qty">' +
+                                        '</td>' +
+                                        '<td class="product-subtotal"><span class="amount" id="'+value.product_id+'">Rp. '+total_sub_barang.toLocaleString()+'</span></td>' +
+                                        '<td class="plantmore-product-remove"><a data-id="'+value.product_id+'" data-nama="'+value.product_name+'" class="cart-delete"><i class="ion-close"></i></a></td>' +
+                                    '</tr>';
+                            total = total + total_sub_barang;
+                    });
+                    proses_transaksi = '<a href="<?php echo base_url('order/checkout');?>" class="proceed-checkout-btn"> Proses transaksi</a>';
+                    update_cart = '<input class="submit btn btn-cart" name="update_cart" value="Update cart" type="button"><a href="shop.html" class="btn continue-btn">Continue Shopping</a>';
+                }else{
+                    html += '<tr><td colspan="6" class="fz-12">Belum ada memiliki keranjang</td></tr>';
+                    update_cart = '<a href="shop.html" class="btn continue-btn">Continue Shopping</a>';
+                }
+                
                 var html_total = '<h2>Cart totals</h2>'+
                                 '<ul>' +
                                     '<li>Subtotal <span class="cart-sub-total" data-subtotal="'+total+'"> Rp. '+total.toLocaleString()+' </span></li>' +
                                     '<li>Total <span class="cart-total"> Rp. '+total.toLocaleString()+' </span></li>' +
-                                '</ul>' +
-                                '<a href="<?php echo base_url('order/checkout');?>" class="proceed-checkout-btn"> Proses transaksi</a>';
+                                '</ul>';
+                    html_total += proses_transaksi;
                 // console.log(total);
                 $(".mycart").html(html);
+                $(".coupon2").html(update_cart);
                 $(".cart-page-total").html(html_total);
                     $(".cart-delete").click(function(){
 
@@ -143,6 +153,10 @@
 
                     }); 
 
+                    var cls_register = '.frm-update-cart';
+                    var buton_register = '.btn-cart';
+                    global.init_form_add(cls_register, buton_register);
+
                     $('.cart-qty').change(function(){
                         var id = '#'+$(this).data('id');
                         var vall = $(this).val();
@@ -167,12 +181,7 @@
 
 
             }
-        });
-
-        var cls_register = '.frm-update-cart';
-        var buton_register = '.btn-cart';
-        global.init_form_add(cls_register, buton_register);
-        
+        });      
         
 
     });
