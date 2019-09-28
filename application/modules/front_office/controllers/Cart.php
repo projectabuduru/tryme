@@ -18,7 +18,7 @@ class Cart extends CI_Controller {
 
     public function cart_add(){
         $id_product = $this->input->post('product_id');
-        
+        // pre($id_product);
         if(!empty($this->id_user)){
             $where = ['cart_user_id', '=', $this->id_user['user_id']];
         }else{
@@ -29,7 +29,7 @@ class Cart extends CI_Controller {
             $where
         ];
         $cek_my_cart = $this->cart->get_cart('*', $where);
-
+        // pre($cek_my_cart);
         if(empty($cek_my_cart)){
             $data = [
                 'cart_user_id' => $this->id_user['user_id'],
@@ -78,7 +78,8 @@ class Cart extends CI_Controller {
         $select = 'product_name,
                     product_qty,
                     product_stok,
-                    product_image,
+                    product_berat,
+                    gambar as product_image,
                     cart.product_id,
                 '.$price;
         if(!empty($this->id_user)){
@@ -96,15 +97,18 @@ class Cart extends CI_Controller {
         $get_my_cart = $this->db->query('SELECT '.$select.'
                                             FROM `cart`
                                             JOIN `data_product` `dap` ON `dap`.`product_id` = `cart`.`product_id`
+                                            join `gambar_product` gp on gp.product_id = dap.product_id
                                             left JOIN `diskon_product` as `dp` ON `dp`.`product_id` = `cart`.`product_id` and `dp`.`tanggal_selesai` >= "'.date('Y-m-d H:i:s', strtotime('+7 hour')).'"
-                                            where '.$where)->result();
+                                            where '.$where.'
+                                            group by cart.product_id
+                                            ')->result();
         $total = 0;
         foreach ($get_my_cart as $key => $value) {
             $price = str_replace(',','.',$value->price) * 1000;
             $old_price = str_replace(',','.',$value->old_price) * 1000;
             $value->price = $price;
             $value->old_price = $old_price;
-            $total = $total + $price;
+            $total = $total + ($price * $value->product_qty);
             $value->total = $total;
         }
         // foreach ($get_my_cart as $key => $value) {
@@ -169,7 +173,8 @@ class Cart extends CI_Controller {
     public function mycart_show(){
 
         $data = [
-            'title' => 'Try me | Cart Ku'
+            'title' => 'Try me | Cart Ku',
+            'user' => get_user_login($this->id_user['user_id']),
         ];
 
         // pre($data);
