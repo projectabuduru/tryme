@@ -71,9 +71,10 @@
                 var data = response.data;
                 var html = '';
                 var total = 0;
+                var total_sub_barang = 0;
                 var diskon = '';
                 $.each(data, function (key, value) { 
-                    total++;
+                    // total++;
 
                     if(value.old_price == value.price){
                         diskon = '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
@@ -81,6 +82,7 @@
                         diskon = '<span class="old-price"> Rp. <del>'+value.old_price.toLocaleString()+',</del> </span><br>'+
                                             '<span class="new-price"> Rp. '+value.price.toLocaleString()+', </span>';
                     }
+                        total_sub_barang = value.price * value.product_qty;
                         html +='<tr>' +
                                     '<td class="plantmore-product-thumbnail"><a href="#"><img alt="" src="<?php echo base_url('assets/images/product/');?>'+value.product_image+'" style="width:35%"></a></td>' +
                                     '<td class="plantmore-product-name"><a href="javscript:void(0);">'+value.product_name+'</a></td>' +
@@ -88,19 +90,19 @@
                                         '<span class="amount">'+diskon+
                                         '</span></td>' +
                                     '<td class="plantmore-product-quantity">' +
-                                        '<input type="hidden" name="product_id[]" value="'+value.product_id+'"><input value="'+value.product_qty+'" name="qty[]" type="number" min="0" max="'+value.product_stok+'" data-harga="'+value.price+'" data-id="'+value.product_id+'" class="cart-qty">' +
+                                        '<input type="hidden" name="product_id[]" value="'+value.product_id+'"><input value="'+value.product_qty+'" name="qty[]" type="number" min="0" max="'+value.product_stok+'" data-harga="'+value.price+'" data-qty="'+value.product_qty+'" data-id="'+value.product_id+'" class="cart-qty">' +
                                     '</td>' +
-                                    '<td class="product-subtotal"><span class="amount" id="'+value.product_id+'">Rp. '+value.price.toLocaleString()+'</span></td>' +
+                                    '<td class="product-subtotal"><span class="amount" id="'+value.product_id+'">Rp. '+total_sub_barang.toLocaleString()+'</span></td>' +
                                     '<td class="plantmore-product-remove"><a data-id="'+value.product_id+'" data-nama="'+value.product_name+'" class="cart-delete"><i class="ion-close"></i></a></td>' +
                                 '</tr>';
-                        total = value.total;
+                        total = total + total_sub_barang;
                 });
                 var html_total = '<h2>Cart totals</h2>'+
                                 '<ul>' +
                                     '<li>Subtotal <span class="cart-sub-total" data-subtotal="'+total+'"> Rp. '+total.toLocaleString()+' </span></li>' +
                                     '<li>Total <span class="cart-total"> Rp. '+total.toLocaleString()+' </span></li>' +
                                 '</ul>' +
-                                '<a href="#" class="proceed-checkout-btn">Proceed to checkout</a>';
+                                '<a href="<?php echo base_url('order/checkout');?>" class="proceed-checkout-btn"> Proses transaksi</a>';
                 // console.log(total);
                 $(".mycart").html(html);
                 $(".cart-page-total").html(html_total);
@@ -145,14 +147,22 @@
                         var id = '#'+$(this).data('id');
                         var vall = $(this).val();
                         var harga = $(this).data('harga');
+                        var qty = $(this).data('qty');
                         var subtotal = $('.cart-sub-total').data('subtotal');
-                        var total_harga = harga * vall ;
-                        subtotal = subtotal + total_harga;
-                        console.log(subtotal, total_harga);
+                        var sub_total_harga = harga * vall ;
+                        var total_harga = 0;
+                       
+                       total_harga = (subtotal - (harga * qty)) + (harga * vall);
+                        
+                        
+                        // subtotal = (subtotal)  + total_harga;
+                        console.log(harga, vall, sub_total_harga, subtotal, total_harga);
                         // console.log(vall,harga);
-                        $(id).html('Rp. '+total_harga.toLocaleString()); 
-                        $('.cart-sub-total').html('Rp.'+subtotal.toLocaleString());
-                        $('.cart-total').html('Rp.' +subtotal.toLocaleString());
+                        $(id).html('Rp. '+sub_total_harga.toLocaleString()); 
+                        $('.cart-sub-total').html('Rp.'+total_harga.toLocaleString());
+                        $('.cart-sub-total').data('subtotal', total_harga);
+                        $(this).data('qty', vall);
+                        $('.cart-total').html('Rp.' +total_harga.toLocaleString());
                     })
 
 

@@ -71,6 +71,9 @@ $route['partner/register'] = 'front_office/Sales_partner/action_register';
 //mycart
 $route['mycart'] = 'front_office/Cart/mycart_show';
 
+//order
+$route['order/checkout'] = 'front_office/Order/checkout';
+
 //profile
 $route['profile'] = 'front_office/Profile/index';
 $route['profile/province'] = 'front_office/Profile/province';

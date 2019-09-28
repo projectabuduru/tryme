@@ -270,7 +270,7 @@
                                 '<li class="mini-cart-btns">' +
                                     '<div class="cart-btns">' +
                                         '<a href="<?php echo base_url('mycart');?>">View cart</a>' +
-                                        '<a href="checkout.html">Checkout</a>' +
+                                        '<a href="<?php echo base_url('order/checkout');?>">Checkout</a>' +
                                     '</div>' +
                                 '</li>';
 

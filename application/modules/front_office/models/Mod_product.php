@@ -39,11 +39,14 @@ class Mod_product extends CI_Model {
                                     dip.satuan,
                                     dip.tanggal_mulai,
                                     dip.tanggal_selesai,
-                                    ifnull(wish_id, null) as wish_id
+                                    ifnull(wish_id, null) as wish_id,
+                                    gp.*
                                 ')
                         ->join('diskon_product as dip', 'dip.product_id = dap.product_id', 'left')
+                        ->join('gambar_product as gp', 'gp.product_id = dap.product_id')
                         ->join('wishlist as wish', 'wish.product_id = dap.product_id', 'left')
-                        ->order_by('created_at', 'desc')
+                        ->order_by('dap.created_at', 'desc')
+                        ->group_by('dap.product_id')
                         ->get($this->table, 5, 0)->result();
                         // pre($query);
         $data = [];
@@ -93,7 +96,7 @@ class Mod_product extends CI_Model {
                 'product_diskon' => $harga_diskon,
                 'diskon' => $value->diskon,
                 'diskon_satuan' => $value->satuan,
-                'product_image' => $value->product_image,
+                'product_image' => $value->gambar,
                 'product_stok' => $value->product_stok,
                 'wish_id' => $value->wish_id,
                 
@@ -109,10 +112,11 @@ class Mod_product extends CI_Model {
     public function all_product($role){
 
         //new product
-        $query = $this->db->select('dap.*, dip.diskon, dip.satuan, dip.tanggal_mulai, dip.tanggal_selesai, ifnull(wish_id, null) as wish_id')
+        $query = $this->db->select('dap.*, dip.diskon, dip.satuan, dip.tanggal_mulai, dip.tanggal_selesai, ifnull(wish_id, null) as wish_id, gp.*')
                         ->join('diskon_product as dip', 'dip.product_id = dap.product_id', 'left')
+                        ->join('gambar_product as gp', 'gp.product_id = dap.product_id')
                         ->join('wishlist as wish', 'wish.product_id = dap.product_id', 'left')
-                        ->order_by('created_at', 'desc')
+                        ->order_by('dap.created_at', 'desc')
                         ->get($this->table, 20, 0)->result();
                         // pre($query);
         $data = [];
@@ -161,7 +165,7 @@ class Mod_product extends CI_Model {
                 'product_diskon' => $harga_diskon,
                 'diskon' => $value->diskon,
                 'diskon_satuan' => $value->satuan,
-                'product_image' => $value->product_image,
+                'product_image' => $value->gambar,
                 'product_stok' => $value->product_stok,
                 'wish_id' => $value->wish_id
                 
