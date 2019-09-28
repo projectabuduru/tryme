@@ -21,9 +21,12 @@ class Home extends CI_Controller {
         try {
             
             $cek_session = !empty($this->session->userdata('user')) ? $this->session->userdata('user')['user_id'] : null;
+            $banner = $this->db->where('status', "Y");
+		    $banner = $this->db->get('banner')->result_array();
             $records = [
                 'feature_product' => $this->product->feature_product($this->id_user['role']),
-                'all_product' => $this->product->all_product($this->id_user['role'])
+                'all_product' => $this->product->all_product($this->id_user['role']),
+                'banner' => $banner
             ];
             // pre($records);
             $data = [

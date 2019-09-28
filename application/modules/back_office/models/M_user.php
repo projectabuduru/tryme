@@ -27,6 +27,12 @@ class M_user extends CI_Model {
             return false;
         }
     }
+
+    public function get_data_partner($id){
+        $sql = "SELECT dp.*,mc.cate_name FROM data_product dp,master_category mc where dp.cate_id=mc.cate_id and dp.product_id = ?";
+        $query = $this->db->query($sql,$id)->row();
+        return $query;
+    }
 }
 
 /* End of file User.php */
