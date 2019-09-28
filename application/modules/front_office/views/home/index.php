@@ -72,7 +72,7 @@
                     echo '<div class="col-lg-3">
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="product-details.html"><img src="'.base_url('assets/images/product/').$value['product_image'].'" alt="Produce Images"></a>
+                                    <a href="product-details.html"><img src="'.base_url($value['product_image']).'" alt="Produce Images"></a>
                                     '.$label_diskon.'
                                     <div class="product-action">
                                         '.$cart.'
@@ -194,7 +194,7 @@
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="product-details.html"><img src="'.base_url('assets/images/product/').$value['product_image'].'" alt="Produce Images"></a>
+                                    <a href="product-details.html"><img src="'.base_url($value['product_image']).'" alt="Produce Images"></a>
                                     '.$label_diskon.'
                                     <div class="product-action">
                                         '.$cart.'
