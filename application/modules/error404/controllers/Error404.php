@@ -11,7 +11,7 @@ class error404 extends CI_Controller
 	{
 		$this->output->set_status_header('404');
 		$cek_session = !empty($this->session->userdata('user')) ? $this->session->userdata('user')['user_id'] : null;
-		$data['user'] = $this->user->get_data($cek_session)->row();
+		$data['user'] = get_user_login($cek_session);
 		$data['title'] = 'Error 404';
 		// pre($data);
 		$this->template->display('index', $data);
